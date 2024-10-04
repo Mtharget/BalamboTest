@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM2e6Tdb1j4G4zV6W7A7sY0f1YgXdklsC2C5t8" crossorigin="anonymous">
+
+    <style>
+        /* Custom Styles */
+        .header {
+            background-color: #ffffff;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            /* Lock the header at the top */
+            top: 0;
+            /* Position it at the very top */
+            left: 0;
+            /* Align to the left */
+            right: 0;
+            /* Align to the right */
+            z-index: 1000;
+            /* Ensure it appears above other elements */
+        }
+
+        body {
+            background-color: #fff;
+            padding-top: 70px;
+            /* Adjust this value based on the header height */
+        }
+
+        .navbar-brand img {
+            height: 50px;
+            /* Set logo height */
+            transition: transform 0.3s ease;
+            /* Smooth transform on hover */
+        }
+
+        .navbar-brand:hover img {
+            transform: scale(1.05);
+            /* Slightly enlarge logo on hover */
+        }
+
+        .navbar-nav .nav-link {
+            transition: transform 0.3s ease;
+            /* Smooth transform on hover */
+            font-size: 20px;
+            /* Increased font size for navigation links */
+            margin: 0 15px;
+            /* Add spacing between links */
+        }
+
+        .navbar-nav .nav-link:hover {
+            transform: translateX(3px);
+            color: rgb(3, 3, 202);
+
+            /* Shift up on hover */
+        }
+
+        .side-scroller {
+            position: fixed;
+            top: 105px;
+            /* Adjust based on header height */
+            right: -350px;
+            /* Increased width of the scroller */
+            /* Initially hidden */
+            width: 300px;
+            /* Increased width */
+            height: calc(90vh - 70px);
+            /* Full height minus header */
+            background-color: #ffffff;
+            /* White background */
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            /* Shadow for side scroller */
+            overflow-y: auto;
+            /* Scrollable content */
+            padding: 15px;
+            /* Padding for side scroller */
+            transition: right 0.6s ease;
+            /* Smooth transition */
+            z-index: 1000;
+            /* Ensure it appears above other elements */
+        }
+
+        .side-scroller.active {
+            right: 0;
+            /* Show sidebar when active */
+        }
+
+        .location-info {
+            font-size: 16px;
+            /* Font size for location info */
+            color: #000;
+            /* Dark text color */
+        }
+
+        .location-info p,
+        .location-info ul {
+            display: flex;
+            align-items: center;
+            /* Center items vertically */
+            margin: 10px 0;
+            /* Add spacing between items */
+        }
+
+        .location-info i {
+            margin-right: 10px;
+            /* Space between icon and text */
+            color: rgb(3, 3, 202);
+            /* Icon color */
+            flex-shrink: 0;
+            /* Prevent the icon from shrinking */
+            /* Align icons well */
+        }
+
+        .toggle-button {
+            position: fixed;
+            top: 15px;
+            /* Adjust position */
+            right: 15px;
+            /* Adjust position */
+            z-index: 1050;
+            /* Ensure it appears above other elements */
+            background-color: white;
+            /* White background for the button */
+            border: 1px solid rgb(0, 0, 0);
+            /* Border color matching Bootstrap primary color */
+            border-radius: 5px;
+            /* Rounded corners */
+            padding: 10px 15px;
+            /* Increased padding for a larger button */
+            font-size: 18px;
+            /* Larger font size */
+            transition: background-color 0.5s ease, transform 0.3s ease;
+            /* Smooth transitions */
+        }
+
+        .toggle-button:hover {
+            background-color: white;
+            border: 1px solid rgb(3, 3, 202);
+            /* Change background on hover */
+            color: rgb(3, 3, 202);
+            /* Change text color on hover */
+            transform: scale(1.1);
+            /* Slightly enlarge button on hover */
+        }
+
+        .icon-container {
+            display: flex;
+            /* Use flexbox for alignment */
+            justify-content: center;
+            /* Center the icons */
+            gap: 15px;
+            /* Space between icons */
+            font-family: 'Roboto', sans-serif;
+            /* Change to a modern, professional font */
+        }
+
+        .icon {
+            text-decoration: none;
+            /* Remove underline from links */
+            color: black;
+            /* Default color for icons */
+            font-size: 40px;
+            /* Adjust icon size */
+            transition: color 0.3s;
+            /* Smooth transition for color changes */
+            margin-left: 10px 0;
+        }
+
+        .icon:hover {
+            color: rgb(3, 3, 202);
+            /* Change color on hover */
+        }
+
+        @media (max-width: 768px) {
+            .side-scroller {
+                right: 0;
+                /* Show sidebar on mobile */
+            }
+
+            .toggle-button {
+                display: none;
+                /* Hide toggle button on mobile */
+            }
+        }
+
+
+      .hours-list {
+            list-style: none;
+            /* Remove default bullets */
+            padding: 0;
+            /* Remove default padding */
+            margin: 0;
+            /* Remove default margin */
+            font-family: Arial, sans-serif;
+            /* Set a professional font */
+        }
+
+        .hours-list li {
+            padding: 10px 0;
+            /* Add vertical padding for spacing */
+            border-bottom: 1px solid #ccc;
+            /* Add a separator line */
+        }
+
+        .hours-list li:last-child {
+            border-bottom: none;
+            /* Remove the bottom border from the last item */
+        }
+
+        .hours-list strong {
+            font-weight: bold;
+            /* Make the days bold */
+            color: #000;
+            /* Set a color for the day names */
+        }
+
+
+
+        /* Banner Styles */
+        .banner {
+            background-color: white;
+            /* Change banner background to black */
+            margin-top: 50px;
+            color: white;
+            /* Change banner text color to white */
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .banner img {
+            width: 100%;
+            height: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            animation: zoomIn 30s infinite;
+            /* Add animation to the image */
+        }
+
+        @keyframes zoomIn {
+
+            0%,
+            100% {
+                transform: scale(1);
+                /* Original size */
+            }
+
+            50% {
+                transform: scale(1.05);
+                /* Zoomed in slightly */
+            }
+        }
+
+        /* Policy Container Styles */
+        .policy-wrapper {
+            display: flex;
+            /* Use Flexbox for alignment */
+            justify-content: space-between;
+            /* Space out the containers */
+            flex-wrap: wrap;
+            /* Allow wrapping on smaller screens */
+            gap: 20px;
+            /* Space between the containers */
+        }
+
+        .policy-container {
+            flex: 1;
+            /* Allow the containers to grow equally */
+            min-width: 300px;
+            /* Set a minimum width for responsiveness */
+            background-color: white;
+            transition: .4s ease-in-out;
+        }
+
+        @keyframes popUp {
+            to {
+                transform: translateY(0);
+                /* Move to original position */
+                opacity: 1;
+                /* Fade in */
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .navbar-nav .nav-link {
+                font-size: 18px;
+                margin: 0 10px;
+            }
+
+            .toggle-button {
+                padding: 8px 12px;
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .navbar-nav .nav-link {
+                font-size: 16px;
+            }
+
+            .banner img {
+                max-height: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-nav .nav-link {
+                font-size: 14px;
+                margin: 0 8px;
+            }
+
+            .side-scroller {
+                right: 0;
+            }
+
+            .toggle-button {
+                display: none;
+            }
+
+            .banner img {
+                max-height: 200px;
+            }
+
+            .policy-container {
+                min-width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar-nav .nav-link {
+                font-size: 12px;
+                margin: 0 5px;
+            }
+
+            .banner img {
+                max-height: 150px;
+            }
+
+            .policy-wrapper {
+                flex-direction: column;
+            }
+
+            .policy-container {
+                margin-bottom: 20px;
+            }
+        }
+
+        .policy-container:hover {
+            transform: translateY(-5px);
+            /* Shift up on hover */
+            /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); */
+            color: rgb(3, 3, 202);
+            /* Increase shadow on hover */
+        }
+
+
+        .image-container {
+            position: fixed;
+            top: 20%;
+            /* Adjust as needed */
+            left: 20%;
+            /* Adjust as needed */
+            display: flex;
+            align-items: center;
+        }
+
+        .image-container img {
+            width: 300px;
+            /* Adjust the size as needed */
+            height: auto;
+            /* Maintain aspect ratio */
+        }
+
+        .typewriter {
+            margin-left: 20px;
+            /* Space between image and text */
+            font-family: 'Courier New', Courier, monospace;
+            overflow: hidden;
+            /* Ensures the text is hidden during typing */
+            border-right: 0.15em solid black;
+            /* Cursor effect */
+            white-space: nowrap;
+            /* Prevent line break */
+            animation: typing 3s steps(30, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink-caret {
+
+            from,
+            to {
+                border-color: transparent;
+            }
+
+            50% {
+                border-color: black;
+            }
+        }
+
+
+        .food-items-container {
+            display: flex;
+            /* Aligns the image and description horizontally */
+            align-items: center;
+            /* Centers items vertically */
+            justify-content: center;
+            /* Center the entire container */
+            margin: 50px 0;
+            /* Add spacing above and below */
+        }
+
+        .food-image {
+            flex: 1;
+            /* Image takes up one part of the flex container */
+            position: relative;
+
+        }
+
+        .food-image img {
+            width: 250px;
+            /* Set a specific width for the image */
+            height: 250px;
+            /* Maintain aspect ratio */
+            animation: fadeIn 1s ease-in-out;
+            /* Animation for image fading */
+            border-radius: 50%;
+            transition: .6s;
+        }
+
+        .food-image img:hover {
+            transform: translateX(-15px);
+        }
+
+        .food-description {
+            flex: 1;
+            /* Description takes up one part of the flex container */
+            margin-left: 20px;
+            /* Space between image and description */
+            animation: slideIn 1s ease-in-out;
+            /* Animation for description sliding in */
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-20px);
+                /* Start from left */
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                /* Slide into position */
+                opacity: 1;
+            }
+        }
+
+
+        /* Footer Styles */
+        /* Footer Styles */
+        .footer {
+            background-color: #000;
+            /* Dark background */
+            color: #fff;
+            /* Light text color */
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            /* Added padding for better spacing */
+        }
+
+        .footer-logo img {
+            width: 150px;
+            /* Adjust size as needed */
+            margin-bottom: 15px;
+        }
+
+        .footer h2 {
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .footer p {
+            margin: 5px 0 15px;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            /* Space between social media and useful links */
+            align-items: center;
+            /* Center align items vertically */
+            margin: 15px 0;
+            /* Margin between the content and footer bottom */
+        }
+
+        .useful-links {
+            text-align: right;
+            /* Align text to the right */
+        }
+
+        .useful-links h4 {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .useful-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .useful-links li {
+            margin: 5px 0;
+        }
+
+        .useful-links a {
+            text-decoration: none;
+            color: #fff;
+            /* Default link color */
+            transition: color 0.6s ease;
+            margin: 2px;
+        }
+
+        .useful-links a:hover {
+            color: rgb(3, 3, 202);
+            /* Change link color on hover */
+        }
+
+        .social-media {
+            margin-right: auto;
+            /* Space from the right end */
+        }
+
+        .social-icon {
+            text-decoration: none;
+            color: #fff;
+            /* Default icon color */
+            margin: 0 10px;
+            font-size: 24px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .social-icon:hover {
+            color: rgb(3, 3, 202);
+            /* Change icon color on hover */
+            transform: scale(1.2);
+            /* Scale up icon on hover */
+        }
+
+        .loader {
+            display: none;
+            position: fixed;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10000;
+        }
+
+        .spinner-border {
+            width: 3rem;
+            height: 3rem;
+            text-align: center;
+        }
+
+        /* Blur background styles */
+        .blurred {
+            filter: blur(2px);
+            pointer-events: none;
+            /* Prevent interactions */
+        }
+
+
+        .close-button {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+/* Show the close button only on phone screen sizes (max-width: 500px) */
+@media (max-width: 500px) {
+    .close-button {
+        display: block;
+    }
+}
+
+        /* Font Awesome icons (make sure to include Font Awesome CDN in your HTML head) */
+    </style>
+</head>
+
+<body>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Header with Logo and Navigation Bar -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand" href="#">
+                    <strong>Balambo Bar Grill</strong> <!-- Bold text before the logo -->
+                    <img src="logo.jpg" alt="Logo"> <!-- Replace with your logo image path -->
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
+                    onclick="toggleSidebar()">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="Home.html" onclick="showLoader(event)">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Home.html" onclick="showLoader(event)">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Home.html" onclick="showLoader(event)">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Home.html" onclick="showLoader(event)">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Push Button for Side Scroller -->
+    <button class="btn toggle-button" onclick="toggleSidebar()">☰</button>
+
+    <!-- Side View Scroller for Location Information -->
+    <div class="side-scroller" id="sideScrollers">
+        <!-- Close Button (Visible only on phone) -->
+        <button class="btn close-button" onclick="toggleSidebar()">✖</button>
+    
+        <h4>Location Information</h4>
+        <div class="location-info">
+            <p><i class="fas fa-map-marker-alt"></i><strong>Address:</strong></p>
+            <p><strong>BEJANE ST, KwaMsane</strong></p>
+    
+            <p><i class="fas fa-phone-alt"></i><strong>Phone:</strong></p>
+            <p><strong>(031) 456-7890</strong></p>
+    
+            <p><i class="fas fa-envelope"></i><strong>Email:</strong></p>
+            <p><strong>balambo@gmail.com</strong></p>
+    
+            <p><strong>Operating Hours:</strong></p>
+    
+            <ul class="hours-list">
+                <li><strong>Mon-Fri:</strong> 24 hours</li>
+                <li><strong>Saturday:</strong> 24 hours</li>
+                <li><strong>Sunday:</strong> 24 hours</li>
+            </ul>
+        </div>
+    
+        <!-- Icon Container -->
+        <div class="icon-container">
+            <!-- Social Media Links -->
+            <a href="https://twitter.com/" class="icon" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://wa.me/" class="icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://facebook.com/" class="icon" target="_blank"><i class="fab fa-facebook"></i></a>
+    
+            <!-- Google Maps Location -->
+            <a href="https://www.google.com/maps/place/Balambo+Tarven/@-28.3473352,32.1275791,17z/data=!3m1!4b1!4m6!3m5!1s0x1efa5b48255faa49:0x72074d0514aabcef!8m2!3d-28.3473399!4d32.130154!16s%2Fg%2F11tt4n86n4?entry=ttu&g_ep=EgoyMDI0MDkzMC4wIKXMDSoASAFQAw%3D%3D"
+                class="icon" target="_blank"><i class="fas fa-map-marker-alt"></i></a>
+        </div>
+    </div>
+
+
+    <!-- Banner Section -->
+    <div class="banner">
+        <img src="banner.jpg" alt="Banner Image"> <!-- Replace with your image path -->
+    </div>
+
+    <!-- Policy Containers -->
+    <div class="container mt-4">
+        <div class="policy-wrapper">
+            <div class="policy-container fade-in" style="animation-delay: 0.5s; text-align: center; color: #000;">
+                <h4><i class="fas fa-undo-alt"></i> Refund Policy</h4>
+                <p>Details about the refund policy. We aim to provide the best service to our customers.</p>
+            </div>
+            <div class="policy-container fade-in" style="animation-delay: 0.7s; text-align: center; color: #000;">
+                <h4><i class="fas fa-credit-card"></i> Payment Information</h4>
+                <p>We accept various payment methods for your convenience.</p>
+            </div>
+            <div class="policy-container fade-in" style="animation-delay: 0.9s; text-align: center; color: #000;">
+                <h4><i class="fas fa-truck"></i> Shipping Policy</h4>
+                <p>Information about our shipping policies and delivery options.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Food Items Section -->
+    <div class="food-items-container d-flex flex-column align-items-center">
+        <div class="food-image">
+            <img id="foodImage" src="food1.jpg" alt="Food Item 1"> <!-- Replace with your image path -->
+        </div>
+        <h3 id="foodTitle">Food Item 1</h3>
+        <p id="foodText">Delicious description of food item 1.</p>
+    </div>
+
+    <!-- Footer Section -->
+    <!-- Footer Section -->
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="logo.jpg" alt="Balambo Logo"> <!-- Replace with your logo path -->
+            </div>
+            <h2>Balambo Restaurant and Bar</h2>
+            <p>Experience the vibrant atmosphere and tantalizing flavors. Join us for an unforgettable dining
+                experience.
+            </p>
+
+      
+
+            <br>
+
+            <div class="useful-links">
+                <h4>Balambo Grill And Bar</h4>
+                <ul>
+                    <li><a href="#menu" onclick="showLoader('#menu'); return false;">Menu</a></li>
+                    <li><a href="#reservations" onclick="showLoader('#reservations'); return false;">Reservations</a>
+                    </li>
+                    <li><a href="#about" onclick="showLoader('#about'); return false;">About Us</a></li>
+                    <li><a href="#contact" onclick="showLoader('#contact'); return false;">Contact</a></li>
+                    <li><a href="#events" onclick="showLoader('#events'); return false;">Events</a></li>
+                </ul>
+            </div>
+                <div class="social-media">
+                    <a href="#" class="social-icon facebook" title="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-icon instagram" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-icon twitter" title="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-icon linkedin" title="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+
+            <p>&copy; 2024 Balambo Restaurant and Bar. All rights reserved.</p>
+        </div>
+    </footer>
+
+  
+
+    <script>
+   
+
+        // function showLoader(event) {
+        //     event.preventDefault(); // Prevent default link behavior
+        //     const loader = document.getElementById('loader');
+        //     const body = document.body; // Get the body element
+        //     loader.style.display = 'block'; // Show loader
+        //     body.classList.add('blurred'); // Add blurred class to body
+
+        //     const targetUrl = event.currentTarget.getAttribute('href');
+
+        //     // Simulate loading and redirect after 2 seconds (you can change this duration)
+        //     setTimeout(() => {
+        //         window.location.href = targetUrl;
+        //     }, 2000); // Adjust timing as needed
+        // }
+
+        const foodItems = [
+            {
+                title: "Food Item 1",
+                description: "Delicious description of food item 1.",
+                image: "food1.jpg" // Replace with your image path
+            },
+            {
+                title: "Food Item 2",
+                description: "Delicious description of food item 2.",
+                image: "food2.jpg" // Replace with your image path
+            },
+            {
+                title: "Food Item 3",
+                description: "Delicious description of food item 3.",
+                image: "food3.jpg" // Replace with your image path
+            }
+        ];
+
+        let currentFoodIndex = 0;
+
+        function updateFoodItem() {
+            const foodTitle = document.getElementById('foodTitle');
+            const foodText = document.getElementById('foodText');
+            const foodImage = document.getElementById('foodImage');
+
+            foodTitle.textContent = foodItems[currentFoodIndex].title;
+            foodText.textContent = foodItems[currentFoodIndex].description;
+            foodImage.src = foodItems[currentFoodIndex].image;
+
+            currentFoodIndex = (currentFoodIndex + 1) % foodItems.length;
+        }
+
+        // Update food item every 5 seconds
+        setInterval(updateFoodItem, 5000);
+    </script>
+
+
+
+
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Balambo Restaurant & Bar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Custom Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            margin: 0;
+            overflow: auto;
+            scroll-behavior: smooth;
+        }
+
+        .breadcrumb {
+            background-color: transparent;
+            margin: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            margin-top: 100px;
+            margin-left: 4%;
+            font-size: 20px;
+            color: #000;
+
+        }
+
+        .breadcrumb-item a {
+            margin-top: 150px;
+            color: #000;
+            text-decoration: none;
+            transition: .5s ease-in-out;
+        }
+
+        .breadcrumb-item a:hover {
+            text-decoration: none;
+            color: rgb(3, 3, 202);
+        }
+
+        .about-section {
+            padding: 50px;
+            text-align: center;
+            /* background-color: #fff; */
+            /* White background for contrast */
+            /* border-radius: 8px; */
+            /* Rounded corners */
+            /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); */
+            /* Soft shadow */
+            animation: fadeIn 1s ease-in forwards;
+            /* Fade in animation */
+        }
+
+        .about-title {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #000;
+            /* Dark text color */
+            animation: slideIn 1s ease-in forwards;
+            /* Slide-in animation */
+        }
+
+        .about-section h1 {
+            text-align: left;
+        }
+
+        .about-content {
+            color: #000;
+            line-height: 1.6;
+            animation: fadeIn 1s ease-in forwards;
+        }
+
+        /* Footer Styles */
+        /* Footer Styles */
+        .footer {
+            background-color: #000;
+            /* Dark background */
+            color: #fff;
+            /* Light text color */
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            /* Added padding for better spacing */
+        }
+
+        .footer-logo img {
+            width: 150px;
+            /* Adjust size as needed */
+            margin-bottom: 15px;
+        }
+
+        .footer h2 {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .footer p {
+            margin: 5px 0 15px;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            /* Space between social media and useful links */
+            align-items: center;
+            /* Center align items vertically */
+            margin: 15px 0;
+            /* Margin between the content and footer bottom */
+        }
+    .useful-information {
+            text-align: right;
+        }
+    
+        .useful-information h4 {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+    
+        .useful-information ul {
+            list-style: none;
+            padding: 0;
+        }
+    
+        .useful-information li {
+            margin: 5px 0;
+        }
+    
+        .useful-information a {
+            text-decoration: none;
+            color: #fff;
+            transition: color 0.6s ease;
+            margin: 2px;
+        }
+    
+        .social-media {
+            margin-right: auto;
+        }
+    
+        .social-icon {
+            text-decoration: none;
+            color: #fff;
+            margin: 0 10px;
+            font-size: 24px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+    
+        .social-icon:hover {
+            color: rgb(3, 3, 202);
+            transform: scale(1.2);
+        }
+    
+        .useful-links a {
+            text-decoration: none;
+            color: #fff;
+            /* Default link color */
+            transition: color 0.6s ease;
+            margin: 2px;
+        }
+    
+        .useful-links a:hover {
+            color: rgb(3, 3, 202);
+            /* Change link color on hover */
+        }
+    
+      
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+
+
+        /* Loader styles */
+        .loader {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 9999;
+            /* Ensure it’s on top */
+            justify-content: center;
+            align-items: center;
+            color: black;
+        }
+
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Breadcrumb Navigation -->
+    <nav aria-label="breadcrumb" class="breadcrumb-container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="Home.html" onclick="showLoader(event)">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">About Us</li>
+        </ol>
+    </nav>
+
+
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    <!-- About Section -->
+    <div class="about-section">
+        <h1 class="about-title">About Us</h1>
+        <div class="about-content">
+            <p>Welcome to Balambo Restaurant & Bar, where culinary excellence meets a vibrant atmosphere. Established
+                in 2024, we pride ourselves on serving delicious meals crafted from the freshest ingredients,
+                accompanied by an extensive selection of drinks.</p>
+            <p>At Balambo, we are dedicated to providing our guests with an unforgettable dining experience, whether
+                it's a casual family dinner, a special celebration, or a night out with friends. Our team of skilled
+                chefs and attentive staff work tirelessly to ensure that every visit is a memorable one.</p>
+            <p>Join us and indulge in our diverse menu that features local and international dishes, all designed to
+                tantalize your taste buds. We also offer live entertainment and events throughout the week, making
+                Balambo a perfect destination for any occasion.</p>
+            <p>We are committed to sustainability and strive to source ingredients locally whenever possible, reducing
+                our carbon footprint and supporting local farmers. Our bar features a variety of carefully selected
+                wines and handcrafted cocktails, perfect for pairing with your meal.</p>
+            <p>We look forward to welcoming you to Balambo Restaurant & Bar, where great food and good times await!</p>
+            
+        </div>
+
+        <!-- Additional Useful Information Section -->
+        <div class="useful-information">
+            <h4>Balambo Bar And Grill</h4>
+            <ul>
+                <li><strong>Address:</strong> 123 Balambo St, Food City</li>
+                <li><strong>Phone:</strong> (123) 456-7890</li>
+                <li><strong>Email:</strong> info@balambo.com</li>
+                <li><strong>Opening Hours:</strong> Mon-Sun: 11 AM - 11 PM</li>
+            </ul>
+        </div>
+    </div>
+<!-- Footer Section -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-logo">
+            <img src="logo.jpg" alt="Balambo Logo">
+        </div>
+        <h2>Balambo Restaurant and Bar</h2>
+        <p>Experience the vibrant atmosphere and tantalizing flavors. Join us for an unforgettable dining experience.
+        </p>
+
+
+        <div class="useful-links">
+            <h4>Balambo Bar And Grill</h4>
+            <ul>
+                <a href="#menu" onclick="showLoader(event)">Menu</a>
+                <a href="#reservations" onclick="showLoader(event)">Reservations</a>
+                <a href="#about" onclick="showLoader(event)">About Us</a>
+                <a href="#contact" onclick="showLoader(event)">Contact</a>
+                <a href="#events" onclick="showLoader(event)">Events</a>
+            </ul>
+        </div>
+        <div class="social-media">
+            <a href="https://facebook.com" class="social-icon" title="Facebook" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://instagram.com" class="social-icon" title="Instagram" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://twitter.com" class="social-icon" title="Twitter" target="_blank">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://linkedin.com" class="social-icon" title="LinkedIn" target="_blank">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </div>
+
+        <p>&copy; 2024 Balambo Restaurant and Bar. All rights reserved.</p>
+    </div>
+</footer>
+
+
+
+    <script>
+        function showLoader(event) {
+            event.preventDefault(); // Prevent default link behavior
+            const loader = document.getElementById('loader');
+            const body = document.body; // Get the body element
+            loader.style.display = 'flex'; // Show loader
+            body.classList.add('blurred'); // Add blurred class to body
+
+            const targetUrl = event.currentTarget.getAttribute('href');
+
+            // Simulate loading and redirect after 2 seconds (you can change this duration)
+            setTimeout(() => {
+                window.location.href = targetUrl;
+            }, 2000); // Adjust timing as needed
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

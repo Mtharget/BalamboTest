@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Balambo Restaurant & Bar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* Custom Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            margin: 0;
+            overflow: auto;
+            scroll-behavior: smooth;
+        }
+
+        .breadcrumb {
+            background-color: transparent;
+            margin: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            margin-top: 100px;
+            margin-left: 4%;
+            font-size: 20px;
+            color: #000;
+
+        }
+
+        .breadcrumb-item a {
+            margin-top: 150px;
+            color: #000;
+            text-decoration: none;
+            transition: .5s ease-in-out;
+        }
+
+        .breadcrumb-item a:hover {
+            text-decoration: none;
+            color: rgb(3, 3, 202);
+        }
+
+       /* Contact Us styles */
+        .contact-us {
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 8px;
+            max-width: 800px;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 2s ease-in-out;
+            /* Fade-in animation */
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .contact-us h1 {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Image styles */
+        .contact-image {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .contact-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid black;
+        }
+
+        /* Contact Info styles */
+        .contact-info {
+            margin-bottom: 2rem;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact Form Input Styles */
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        /* Focus Effect */
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #666;
+            box-shadow: 0 0 5px rgba(102, 102, 102, 0.5);
+            outline: none;
+        }
+
+        /* Button Styles */
+        .contact-form button {
+            padding: 0.75rem 2rem;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            /* transition: background-color 0.5s; */
+            transition: background-color 0.3s ease;      
+  }
+
+        .contact-form button:hover {
+           background-color: white;
+            color: #000;
+            border: 1px solid black;
+        }
+
+       /* Footer Styles */
+        .footer {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+        }
+    
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+    
+        .footer-logo img {
+            width: 150px;
+            margin-bottom: 15px;
+        }
+    
+        .footer h2 {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+    
+        .footer p {
+            margin: 5px 0 15px;
+        }
+    
+        .useful-information {
+            text-align: right;
+        }
+    
+        .useful-information h4 {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+    
+        .useful-information ul {
+            list-style: none;
+            padding: 0;
+        }
+    
+        .useful-information li {
+            margin: 5px 0;
+        }
+    
+        .useful-information a {
+            text-decoration: none;
+            color: #fff;
+            transition: color 0.6s ease;
+            margin: 2px;
+        }
+    
+        .social-media {
+            margin-right: auto;
+        }
+    
+        .social-icon {
+            text-decoration: none;
+            color: #fff;
+            margin: 0 10px;
+            font-size: 24px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+    
+        .social-icon:hover {
+            color: rgb(3, 3, 202);
+            transform: scale(1.2);
+        }
+    
+        .useful-links a {
+            text-decoration: none;
+            color: #fff;
+            /* Default link color */
+            transition: color 0.6s ease;
+            margin: 2px;
+        }
+    
+        .useful-links a:hover {
+            color: rgb(3, 3, 202);
+            /* Change link color on hover */
+        }
+    
+        /* Loader styles */
+        .loader {
+            display: none;
+            /* Hidden by default */
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 9999;
+            color: black;
+        }
+    
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+    
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Breadcrumb Navigation -->
+    <nav aria-label="breadcrumb" class="breadcrumb-container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="Home.html" onclick="showLoader(event)">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+        </ol>
+    </nav>
+
+
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    <!-- Contact Us Section -->
+    <section class="contact-us">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p>We'd love to hear from you! Please fill out the form below or reach us through the following contact
+                information.</p>
+
+            <!-- Contact Image -->
+            <div class="contact-image">
+                <img src="logo.jpg" alt="Balambo Contact Image">
+            </div>
+
+            <!-- Contact Info -->
+            <div class="contact-info">
+                <h3>Our Address</h3>
+                <p>BEJANE ST, KwaMsane</p>
+
+                <h3>Phone</h3>
+                <p>(031) 456-7890</p>
+
+                <h3>Email</h3>
+                <p>info@balambo.com</p>
+            </div>
+
+    <!-- Contact Form -->
+    <div class="contact-form">
+
+        <!-- web3forms -->
+<form action="https://api.web3forms.com/submit" method="POST">
+    <!-- <form onsubmit="sendEmail(); reset();"> -->
+            <div class="form-group">
+
+                    <input type="hidden" name="access_key" value="4e393287-e8cb-458f-95be-b6abe66aa2cc">
+
+
+                <label for="name"><i class="fas fa-user"></i> Your Name</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email"><i class="fas fa-envelope"></i> Your Email</label>
+                <input type="email" id="email" name="email" required>
+                <label for="message"><i class="fas fa-comment-dots"></i> Your Message</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+           
+    
+            <button type="submit" >Send Message</button>
+        </form>
+    </div>
+
+           
+            </section>
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="logo.jpg" alt="Balambo Logo"> <!-- Replace with your logo path -->
+            </div>
+            <h2>Balambo Restaurant and Bar</h2>
+            <p>Experience the vibrant atmosphere and tantalizing flavors. Join us for an unforgettable dining
+                experience.
+            </p>
+
+
+
+
+
+            <div class="useful-links">
+                <h4>Balambo Bar And Grill</h4>
+                <ul>
+                    <a href="#menu" onclick="showLoader(event)">Menu</a>
+                    <a href="#reservations" onclick="showLoader(event)">Reservations</a>
+                    <a href="About.html" onclick="showLoader(event)">About Us</a>
+                    <a href="#contact" onclick="showLoader(event)">Contact</a>
+                    <a href="#events" onclick="showLoader(event)">Events</a>
+                </ul>
+            </div>
+            <div class="social-media">
+                <a href="https://www.facebook.com/yourpage" class="social-icon facebook" title="Facebook"
+                    target="_blank" onclick="showLoader(event)">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.instagram.com/yourprofile" class="social-icon instagram" title="Instagram"
+                    target="_blank" onclick="showLoader(event)">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://twitter.com/yourprofile" class="social-icon twitter" title="Twitter" target="_blank"
+                    onclick="showLoader(event)">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/yourprofile" class="social-icon linkedin" title="LinkedIn"
+                    target="_blank" onclick="showLoader(event)">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+
+            <p>&copy; 2024 Balambo Restaurant and Bar. All rights reserved.</p>
+        </div>
+
+    </footer>
+
+    <!-- Clear Fields -->
+     <script>
+        function clearFields() {
+                // Clear input fields
+                document.getElementById('name').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('message').value = '';
+            }
+
+            // Example: Add this function to the form submission event
+            document.querySelector('form').addEventListener('submit', function (event) {
+                // event.preventDefault(); // Prevents the form from refreshing the page
+
+                clearFields(); // Clear input fields after form submission
+            });
+     </script>
+
+    
+
+
+    <script>
+        function showLoader(event) {
+            event.preventDefault(); // Prevent default link behavior
+            const loader = document.getElementById('loader');
+            const body = document.body; // Get the body element
+            loader.style.display = 'flex'; // Show loader
+            body.classList.add('blurred'); // Add blurred class to body
+
+            const targetUrl = event.currentTarget.getAttribute('href');
+
+            // Simulate loading and redirect after 2 seconds (you can change this duration)
+            setTimeout(() => {
+                window.location.href = targetUrl;
+            }, 2000); // Adjust timing as needed
+        }
+    </script>
+
+    <script src=" https://smtpjs.com/v3/smtp.js"></script>
+
+    <!-- <script>
+
+        function sendEmail()
+        {
+            Email.send({
+                Host: "smtp.elasticemail.com",
+                Username: "bayandamsane09@gmail.com",
+
+                // dont forget
+                Password: "284BBFC072BE06D4C6D2BA98D1EF4E876D13",
+                To: 'bayandamsane09@gmail.com',
+                From: document.getElementById('email').value,
+                Subject: "New Contact Form Enquiry",
+                Body: "Name" + document.getElementById('name').value+
+                " <br> Email Address " + document.getElementById('email').value+
+                "  <br> Message " + document.getElementById('message').value
+
+            }).then(
+                message => alert(message)
+            );
+        }
+
+
+    </script> -->
+
+    <script>
+        function sendEmail() {
+                Email.send({
+                    Host: "smtp.elasticemail.com",
+                    Username: "bayandamsane09@gmail.com", // Your verified email with Elastic Email
+                    Password: "284BBFC072BE06D4C6D2BA98D1EF4E876D13",
+                    To: 'bayandamsane09@gmail.com', // The recipient's email address
+                    From: document.getElementById('email').value, // Sender email (this should be verified with Elastic Email)
+                    Subject: "New Contact Form Enquiry",
+                    Body: "Name: " + document.getElementById('name').value +
+                        "<br> Email Address: " + document.getElementById('email').value +
+                        "<br> Message: " + document.getElementById('message').value
+                }).then(
+                    message => alert("Mail sent successfully!")
+                ).catch(
+                    error => alert("Error sending mail: " + error)
+                );
+            }
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
